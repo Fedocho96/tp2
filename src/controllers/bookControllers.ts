@@ -31,10 +31,16 @@ const getBookById = async (req: Request, res: Response) => {
 
 // CREATE NEW BOOK
 const createBook = async (req: Request, res: Response) => {
+  if (!req.body || typeof req.body !== "object") {
+    return res
+      .status(400)
+      .json(createResponseToClient(false, 400, "Missing or invalid body"));
+  }
+
   const { title, author, publishedYear, genre } = req.body as bookInterface;
 
   if (!title || !author) {
-    res
+    return res
       .status(400)
       .json(
         createResponseToClient(false, 400, "Title and author are required")
@@ -48,9 +54,12 @@ const createBook = async (req: Request, res: Response) => {
       .status(201)
       .json(createResponseToClient(true, 201, "Book created", newBook));
   } catch (error: any) {
-    res.status(500).json(createResponseToClient(false, 500, error.message));
+    res
+      .status(500)
+      .json(createResponseToClient(false, 500, error.message));
   }
 };
+
 
 // UPDATE BOOK
 const updateBook = async (req: Request, res: Response) => {
