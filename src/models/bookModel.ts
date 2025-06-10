@@ -13,6 +13,6 @@ const bookSchema = new Schema(
   }
 );
 
-const book = model("Book", bookSchema);
+const Book = model("Book", bookSchema);
 
-export { book };
+export { Book };
