@@ -1,8 +1,6 @@
 import {connectMongoDb} from "./config/mongo";
-import {Book} from "./models/bookModel";
 import express from "express";
-import  createResponseToClient  from "./utils/createResToClient";
-import BookInterface from "./interfaces/Book";
+
 process.loadEnvFile()
 
 

@@ -2,18 +2,12 @@ import { Router } from "express";
 import { Book } from "../models/bookModel";
 import bookInterface from "../interfaces/Book";
 import createResponseToClient from "../utils/createResToClient";
+import { getAllBooks } from "../controllers/bookControllers";
 
 const gameRouter = Router();
 
 // GET ALL BOOKS
-gameRouter.get("/api/books", async (_req, res) => {
-  try {
-    const books = await Book.find({});
-    res.json(createResponseToClient(true, 200, "All books retrieved", books));
-  } catch (error: any) {
-    res.status(500).json(createResponseToClient(false, 500, error.message));
-  }
-});
+gameRouter.get("/api/books", getAllBooks )
 
 // GET BOOK BY ID
 gameRouter.get("/api/books/:id", async (req, res) => {
